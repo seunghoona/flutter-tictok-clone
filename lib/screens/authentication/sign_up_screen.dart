@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/screens/authentication/login_screen.dart';
@@ -34,9 +35,15 @@ class SignUpScreen extends StatelessWidget {
               Gaps.v14,
               Text(
                   "Create a profile, follow other accounts, make your own videos, and more."),
-              Gaps.v10,
+              Gaps.v40,
               AuthButton(
-                text: "Use phone or email",
+                text: "Use email or password",
+                faIcon: FaIcon(FontAwesomeIcons.user),
+              ),
+              Gaps.v16,
+              AuthButton(
+                text: "Contunue with Apple",
+                faIcon: FaIcon(FontAwesomeIcons.apple),
               ),
             ],
           ),
