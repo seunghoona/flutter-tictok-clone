@@ -13,6 +13,7 @@ class FormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       widthFactor: 1,
+      // 애니메이션 효과를 준다
       child: AnimatedContainer(
         padding: const EdgeInsets.all(Sizes.size14),
         decoration: BoxDecoration(
@@ -21,6 +22,7 @@ class FormButton extends StatelessWidget {
               disabled ? Colors.grey.shade300 : Theme.of(context).primaryColor,
         ),
         duration: const Duration(microseconds: 500),
+        // 애니메이션 효과를 준다
         child: AnimatedDefaultTextStyle(
           duration: const Duration(microseconds: 500),
           style: TextStyle(

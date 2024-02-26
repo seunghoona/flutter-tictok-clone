@@ -24,6 +24,8 @@ class _EmailScreenState extends State<EmailScreen> {
     });
   }
 
+  ///  super.dispose 마지막에 선언하여 처리
+  ///  선언을 통해 코드의 가독성을 높임
   @override
   void dispose() {
     _ussernameController.dispose();

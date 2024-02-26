@@ -25,6 +25,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
     });
   }
 
+  // StatefulWidget을 사용하는 경우 Context를 파라미터를 정의하지 않아도 된다.
   void _onNextTap() {
     if (_username.isEmpty) return;
     Navigator.of(context).push(
