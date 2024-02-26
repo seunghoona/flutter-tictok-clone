@@ -59,7 +59,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const BirthDayScreen(),
+        builder: (context) => const BirthdayScreen(),
       ),
     );
   }
