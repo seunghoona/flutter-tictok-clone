@@ -42,8 +42,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     hintText: "email",
                   ),
                   validator: (value) {
-                    return null;
-                    // "invalid email";
+                    return value != null && value.isEmpty
+                        ? "Please write your email"
+                        : null;
                   },
                   onSaved: (newValue) {
                     if (newValue != null) {
@@ -57,8 +58,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     hintText: "password",
                   ),
                   validator: (value) {
-                    return null;
-                    // "wrong password";
+                    return value != null && value.isEmpty
+                        ? "Please write your wrong password"
+                        : null;
                   },
                   onSaved: (newValue) {
                     if (newValue != null) {
