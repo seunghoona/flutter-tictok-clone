@@ -14,11 +14,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
   final screen = [
-    const StfScreen(),
-    const StfScreen(),
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
     Container(),
-    const StfScreen(),
-    const StfScreen(),
+    StfScreen(
+      key: GlobalKey(),
+    ),
+    StfScreen(
+      key: GlobalKey(),
+    ),
   ];
 
   void _onTap(int index) {
