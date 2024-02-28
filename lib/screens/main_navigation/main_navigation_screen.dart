@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/screens/main_navigation/widget/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -20,7 +21,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     )
   ];
 
-  void onTap(int index) {
+  void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -29,20 +30,46 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: screen[_selectedIndex],
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _selectedIndex,
-          destinations: const [
-            NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.house),
-              label: "Home",
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            NavTap(
+              icon: FontAwesomeIcons.house,
+              text: "house",
+              isSelected: _selectedIndex == 0,
+              onTap: () => {
+                _onTap(0),
+              },
             ),
-            NavigationDestination(
-              icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-              label: "Search",
+            NavTap(
+              icon: FontAwesomeIcons.magnifyingGlass,
+              text: "Discover",
+              isSelected: _selectedIndex == 1,
+              onTap: () => {
+                _onTap(1),
+              },
+            ),
+            NavTap(
+              icon: FontAwesomeIcons.question,
+              text: "Inbox",
+              isSelected: _selectedIndex == 2,
+              onTap: () => {
+                _onTap(2),
+              },
+            ),
+            NavTap(
+              icon: FontAwesomeIcons.user,
+              text: "Profile",
+              isSelected: _selectedIndex == 4,
+              onTap: () => {
+                _onTap(4),
+              },
             )
           ],
-          onDestinationSelected: onTap,
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/screens/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/screens/main_navigation/main_navigation_screen.dart';
 
+/// Column 세로 공간을 최대한 차지 mainAxisSize.min을 이용해 컬럼의 크기만큼만 차지하게 할 수 있다.
+/// Row 가로 공간을 최대한 차지
 void main() {
   runApp(const TicTokApp());
 }
@@ -28,7 +30,7 @@ class TicTokApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const SignUpScreen(),
+      home: const MainNavigationScreen(),
     );
   }
 }
