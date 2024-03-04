@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/screens/vidoes/widget/video_post.dart';
 
 class VideoTimeLineScreen extends StatefulWidget {
   const VideoTimeLineScreen({super.key});
@@ -12,47 +13,39 @@ class _VideoTimeLineScreenState extends State<VideoTimeLineScreen> {
 
   final PageController _pageController = PageController();
 
-  List<Color> colors = [
-    Colors.blue,
-    Colors.pink,
-    Colors.teal,
-    Colors.yellow,
-  ];
+  final Duration _scrolleDuration = const Duration(milliseconds: 250);
+  final Curve _scrollCurve = Curves.linear;
 
   void _onPageChanged(int page) {
     _pageController.animateToPage(
       page,
-      duration: const Duration(milliseconds: 5),
-      curve: Curves.linear,
+      duration: _scrolleDuration,
+      curve: _scrollCurve,
     );
 
     if (page == _itemCount - 1) {
       _itemCount = _itemCount + 4;
-      colors.addAll([
-        Colors.blue,
-        Colors.pink,
-        Colors.teal,
-        Colors.yellow,
-      ]);
     }
     setState(() {});
+  }
+
+  void _onVideoFinished() {
+    _pageController.nextPage(
+      duration: _scrolleDuration,
+      curve: _scrollCurve,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: colors.length,
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        itemBuilder: (context, index) => Container(
-              color: colors.elementAt(index),
-              child: Center(
-                child: Text(
-                  "Screen $index",
-                  style: const TextStyle(fontSize: 24),
-                ),
-              ),
-            ));
+      scrollDirection: Axis.vertical,
+      itemCount: _itemCount,
+      controller: _pageController,
+      onPageChanged: _onPageChanged,
+      itemBuilder: (context, index) => VideoPost(
+        onVideoFinished: _onVideoFinished,
+      ),
+    );
   }
 }
