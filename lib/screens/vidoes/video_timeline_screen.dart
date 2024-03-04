@@ -37,16 +37,25 @@ class _VideoTimeLineScreenState extends State<VideoTimeLineScreen> {
     );
   }
 
+  Future<void> _onRefresh() {
+    return Future.delayed(const Duration(seconds: 3));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      scrollDirection: Axis.vertical,
-      itemCount: _itemCount,
-      controller: _pageController,
-      onPageChanged: _onPageChanged,
-      itemBuilder: (context, index) => VideoPost(
-        onVideoFinished: _onVideoFinished,
-        index: index,
+    return RefreshIndicator(
+      onRefresh: _onRefresh,
+      displacement: 50,
+      edgeOffset: 20,
+      child: PageView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: _itemCount,
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        itemBuilder: (context, index) => VideoPost(
+          onVideoFinished: _onVideoFinished,
+          index: index,
+        ),
       ),
     );
   }

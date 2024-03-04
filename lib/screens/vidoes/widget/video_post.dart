@@ -34,8 +34,7 @@ class _VideoPostState extends State<VideoPost>
 
   void _initVideosPlayer() async {
     await _videoPlayerController.initialize();
-
-    setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(
       () {
         if (_videoPlayerController.value.isInitialized) {
@@ -47,6 +46,7 @@ class _VideoPostState extends State<VideoPost>
         }
       },
     );
+    setState(() {});
   }
 
   @override
@@ -83,14 +83,10 @@ class _VideoPostState extends State<VideoPost>
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
       _animationController.reverse();
-      setState(() {
-        _isPaused = !_isPaused;
-      });
-      return;
+    } else {
+      _videoPlayerController.play();
+      _animationController.forward();
     }
-
-    _videoPlayerController.play();
-    _animationController.forward();
     setState(() {
       _isPaused = !_isPaused;
     });
