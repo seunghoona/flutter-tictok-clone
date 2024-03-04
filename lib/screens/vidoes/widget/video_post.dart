@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/screens/vidoes/widget/vides_post_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -28,6 +30,8 @@ class _VideoPostState extends State<VideoPost>
   bool _isPaused = false;
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
+  bool _isTextDescription = false;
+
   void _initVideosPlayer() async {
     await _videoPlayerController.initialize();
 
@@ -52,17 +56,14 @@ class _VideoPostState extends State<VideoPost>
 
     _animationController = AnimationController(
       // SingleTickerProviderStateMixin
+      // 위젯이 안 보일 때는 애니메이션을 작동하지 않도록 막음
+      // 매프레임마다 콜백함수를 호출하기 때문에 해당 위젯이 보일 때만 작동하도록함
       vsync: this,
       lowerBound: 1.0,
       upperBound: 1.5,
       value: 1.5,
       duration: _animationDuration,
     );
-
-    // 애니메이션이 변할 때마다 build 호출
-    _animationController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -137,6 +138,82 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+              bottom: 40,
+              left: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "@seunghoona",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Gaps.v8,
+                  const Text(
+                    "승후와 쏘롱이 홈플러스 탐험",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizes.size12,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        _isTextDescription
+                            ? "#쏘롱이, #후롱이, #홈플러스 #소영이화남"
+                            : "#쏘롱이, #후롱이, #홈플러스 ...",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: Sizes.size12,
+                        ),
+                      ),
+                      Gaps.h2,
+                      GestureDetector(
+                        onTap: () => {
+                          setState(() {
+                            _isTextDescription = !_isTextDescription;
+                          })
+                        },
+                        child: const Text(
+                          "See more",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              )),
+          Positioned(
+            bottom: 40,
+            right: 20,
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      "https://img.freepik.com/free-photo/cute-ai-generated-cartoon-bunny_23-2150288884.jpg"),
+                  child: Text(
+                    "승후",
+                  ),
+                ),
+                Gaps.v20,
+                VideoPostButton(
+                    icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
+                Gaps.v20,
+                VideoPostButton(icon: FontAwesomeIcons.comment, text: "33K"),
+                Gaps.v20,
+                VideoPostButton(icon: FontAwesomeIcons.share, text: "share")
+              ],
             ),
           ),
         ],
