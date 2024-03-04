@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/screens/main_navigation/stf_screen.dart';
 import 'package:tiktok_clone/screens/main_navigation/widget/nav_tab.dart';
+import 'package:tiktok_clone/screens/main_navigation/widget/post_view_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -17,6 +19,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _onPostViedoButtonTap() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Container(),
+          fullscreenDialog: true,
+        ));
   }
 
   @override
@@ -65,7 +76,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 _onTap(1),
               },
             ),
-            Container(),
+            Gaps.h10,
+            GestureDetector(
+                onTap: _onPostViedoButtonTap, child: const PostViewButton()),
+            Gaps.h10,
             NavTap(
               icon: FontAwesomeIcons.message,
               selectedIcon: FontAwesomeIcons.solidMessage,
