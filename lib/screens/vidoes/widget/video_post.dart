@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/screens/vidoes/widget/video_comment.dart';
 import 'package:tiktok_clone/screens/vidoes/widget/vides_post_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -74,7 +75,9 @@ class _VideoPostState extends State<VideoPost>
 
   void _onVisibilityChanged(VisibilityInfo info) {
     print("Video: #${widget.index} is ${info.visibleFraction * 100}");
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    if (info.visibleFraction == 1 &&
+        !_videoPlayerController.value.isPlaying &&
+        !_isPaused) {
       _videoPlayerController.play();
     }
   }
@@ -90,6 +93,25 @@ class _VideoPostState extends State<VideoPost>
     setState(() {
       _isPaused = !_isPaused;
     });
+  }
+
+  void _onCommentTap(BuildContext context) async {
+    if (_videoPlayerController.value.isPlaying) {
+      _onTogglePause();
+    }
+    // 댓글 창을 닫게 되면 resolve가 된다.
+    await showModalBottomSheet(
+      context: context,
+
+      // 위 화면에 색
+      // barrierColor: Colors.amber[20],
+      // VideoComments의 에 정해진 색을 사용
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return const VideoComments();
+      },
+    );
+    _onTogglePause();
   }
 
   @override
@@ -202,12 +224,15 @@ class _VideoPostState extends State<VideoPost>
                     "승후",
                   ),
                 ),
-                Gaps.v20,
+                Gaps.v28,
                 VideoPostButton(
                     icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
-                Gaps.v20,
-                VideoPostButton(icon: FontAwesomeIcons.comment, text: "33K"),
-                Gaps.v20,
+                Gaps.v28,
+                GestureDetector(
+                    onTap: () => _onCommentTap(context),
+                    child: VideoPostButton(
+                        icon: FontAwesomeIcons.comment, text: "33K")),
+                Gaps.v28,
                 VideoPostButton(icon: FontAwesomeIcons.share, text: "share")
               ],
             ),
