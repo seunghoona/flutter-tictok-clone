@@ -33,6 +33,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // keyboard 가 올라올 때 화면 깨짐 방지
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Offstage(

@@ -102,9 +102,14 @@ class _VideoPostState extends State<VideoPost>
     // 댓글 창을 닫게 되면 resolve가 된다.
     await showModalBottomSheet(
       context: context,
-
       // 위 화면에 색
-      // barrierColor: Colors.amber[20],
+      barrierColor: Colors.grey.shade600,
+      /**
+       * isScrollControlled를 사용하면 sheet size를 변경할 수 있다.
+       * 그러나 scrollControlDisabledMaxHeightRatio: 0.8,와 같이 사용할 수 없다
+       */
+      // isScrollControlled: true,
+      scrollControlDisabledMaxHeightRatio: 0.8,
       // VideoComments의 에 정해진 색을 사용
       backgroundColor: Colors.transparent,
       builder: (context) {
